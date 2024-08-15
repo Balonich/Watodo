@@ -22,15 +22,15 @@
 ## 4. Refactoring
 
 - [x] Use Vite
-- [ ] Refactor App.jsx by creating more Components
-- [ ] Refactor AddTodo Component to remove direct DOM call
-- [ ] Refactor Components to utilize [Container/Presentational (Container/View) pattern](https://medium.com/@vitorbritto/react-design-patterns-the-container-presentational-pattern-775b91aa0c49)
+- [x] Refactor App.jsx by creating more Components
+- [x] Refactor AddTodo Component to remove direct DOM call
+- [x] Refactor Components to utilize [Container/Presentational (Container/View) pattern](https://medium.com/@vitorbritto/react-design-patterns-the-container-presentational-pattern-775b91aa0c49)
 
 ## 5. External API Integration
 
 - [ ] Use `fetch` to get todos using API
 
-## Potentian Features
+## Potential Features
 
 - [ ] Change emoji icons to png icons
 - [ ] TodoItems drag-and-drop reorder ([Tutorial](https://www.youtube.com/watch?v=CJycVlSuaPg))

@@ -1,10 +1,9 @@
-import TodoItem from "./components/TodoItem.jsx";
+import App from "./AppView.jsx";
 import Todo from "./models/todo/todo.jsx";
 import { useState } from "react";
 import importedTodos from "./data/todos.json";
-import AddTodo from "./components/AddTodo.jsx";
 
-function App() {
+export default function AppContainer() {
   const [todos, setTodos] = useState(
     importedTodos.map((todo) => new Todo(todo.id, todo.title, todo.completed))
   );
@@ -40,36 +39,12 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <header>
-        <h1>My To Do List</h1>
-      </header>
-
-      <AddTodo addHandler={handleAdd} />
-
-      <ul className="task-list">
-        {todos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todoProp={todo}
-            checkedHandler={handleChecked}
-            editSaveHandler={handleEditSave}
-            deleteHandler={handleDelete}
-          />
-        ))}
-      </ul>
-
-      <footer>
-        <span>
-          You have{" "}
-          <span className="task-count">
-            {todos.filter((todo) => !todo.completed).length}
-          </span>{" "}
-          tasks remaining
-        </span>
-      </footer>
-    </div>
+    <App
+      todos={todos}
+      handleAdd={handleAdd}
+      handleChecked={handleChecked}
+      handleEditSave={handleEditSave}
+      handleDelete={handleDelete}
+    />
   );
 }
-
-export default App;
