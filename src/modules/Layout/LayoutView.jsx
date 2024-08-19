@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
-import TodoItemContainer from "./modules/TodoItem/TodoItemContainer.jsx";
-import AddTodoContainer from "./modules/AddTodo/AddTodoContainer.jsx";
-import FooterContainer from "./modules/Footer/FooterContainer.jsx";
-import TodoItemsListContainer from "./modules/TodoItemsList/TodoItemsListContainer.jsx";
+import TodoItemContainer from "../TodoItem/TodoItemContainer.jsx";
+import AddTodoContainer from "../AddTodo/AddTodoContainer.jsx";
+import FooterContainer from "../Footer/FooterContainer.jsx";
+import TodoItemsListContainer from "../TodoItemsList/TodoItemsListContainer.jsx";
 
-export default function App({
+export default function Layout({
   todos,
   handleAdd,
   handleChecked,
@@ -36,7 +36,7 @@ export default function App({
   );
 }
 
-App.propTypes = {
+Layout.propTypes = {
   todos: PropTypes.array.isRequired,
   handleAdd: PropTypes.func.isRequired,
   handleChecked: PropTypes.func.isRequired,

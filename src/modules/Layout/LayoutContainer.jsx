@@ -1,15 +1,21 @@
-import App from "./AppView.jsx";
-import Todo from "./models/todo/todo.jsx";
+import Layout from "./LayoutView.jsx";
+import Todo from "../../models/todo/todo.jsx";
 import { useState, useEffect } from "react";
+import {
+  fetchTodos,
+  addTodo,
+  updateTodoStatus,
+  updateTodoTitle,
+  deleteTodo,
+} from "../../api/todosApi.js";
 
-export default function AppContainer() {
+export default function LayoutContainer() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/todos?limit=5")
-      .then((response) => response.json())
+    fetchTodos()
       .then((data) => {
-        const todosData = data.todos.map(
+        const todosData = data.map(
           (item) => new Todo(item.id, item.todo, item.completed)
         );
         setTodos(todosData);
@@ -18,16 +24,7 @@ export default function AppContainer() {
   }, []);
 
   function handleAdd(todoTitle) {
-    fetch("https://dummyjson.com/todos/add", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        todo: todoTitle,
-        completed: false,
-        userId: 1,
-      }),
-    })
-      .then((result) => result.json())
+    addTodo(todoTitle)
       .then((newTodo) =>
         setTodos([...todos, new Todo(todos.length + 1, newTodo.todo)])
       )
@@ -35,14 +32,7 @@ export default function AppContainer() {
   }
 
   function handleChecked(todo) {
-    fetch(`https://dummyjson.com/todos/${todo.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        completed: !todo.completed,
-      }),
-    })
-      .then((result) => result.json())
+    updateTodoStatus(todo.id, !todo.completed)
       .then((updatedTodo) =>
         setTodos(
           todos.map((t) => {
@@ -57,14 +47,7 @@ export default function AppContainer() {
   }
 
   function handleEditSave(newTitle, todo) {
-    fetch(`https://dummyjson.com/todos/${todo.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        todo: newTitle,
-      }),
-    })
-      .then((result) => result.json())
+    updateTodoTitle(todo.id, newTitle)
       .then((updatedTodo) =>
         setTodos(
           todos.map((t) => {
@@ -79,13 +62,13 @@ export default function AppContainer() {
   }
 
   function handleDelete(todo) {
-    fetch(`https://dummyjson.com/todos/${todo.id}`, {
-      method: "DELETE",
-    }).then(() => setTodos(todos.filter((t) => t.id !== todo.id)));
+    deleteTodo(todo.id).then(() =>
+      setTodos(todos.filter((t) => t.id !== todo.id))
+    );
   }
 
   return (
-    <App
+    <Layout
       todos={todos}
       handleAdd={handleAdd}
       handleChecked={handleChecked}
