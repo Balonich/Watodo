@@ -28,7 +28,7 @@
 
 ## 5. External API Integration
 
-- [ ] Use `fetch` to get todos using API
+- [x] Use `fetch` to get todos using API
 
 ## Potential Features
 
