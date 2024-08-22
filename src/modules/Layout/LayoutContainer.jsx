@@ -1,6 +1,5 @@
 import Layout from "./LayoutView.jsx";
 import Todo from "../../models/todo/todo.jsx";
-import { useState, useEffect } from "react";
 import {
   fetchTodos,
   addTodo,
@@ -8,68 +7,59 @@ import {
   updateTodoTitle,
   deleteTodo,
 } from "../../api/todosApi.js";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+
+function useTodos() {
+  return useQuery({ queryKey: ["todos"], queryFn: fetchTodos });
+}
 
 export default function LayoutContainer() {
-  const [todos, setTodos] = useState([]);
+  const queryClient = useQueryClient();
+  const todoQuery = useTodos();
 
-  useEffect(() => {
-    fetchTodos()
-      .then((data) => {
-        const todosData = data.map(
-          (item) => new Todo(item.id, item.todo, item.completed)
-        );
-        setTodos(todosData);
-      })
-      .catch((error) => console.error("Error fetching todos:", error));
-  }, []);
+  const addTodoMutation = useMutation({
+    mutationFn: addTodo,
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ["todos"] }),
+  });
+
+  const updateTodoStatusMutation = useMutation({
+    mutationFn: updateTodoStatus,
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ["todos"] }),
+  });
+
+  const updateTodoTitleMutation = useMutation({
+    mutationFn: updateTodoTitle,
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ["todos"] }),
+  });
+
+  const deleteTodoMutation = useMutation({
+    mutationFn: deleteTodo,
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ["todos"] }),
+  });
 
   function handleAdd(todoTitle) {
-    addTodo(todoTitle)
-      .then((newTodo) =>
-        setTodos([...todos, new Todo(todos.length + 1, newTodo.todo)])
-      )
-      .catch((error) => console.error("Error adding todo:", error));
+    addTodoMutation.mutate(todoTitle);
   }
 
   function handleChecked(todo) {
-    updateTodoStatus(todo.id, !todo.completed)
-      .then((updatedTodo) =>
-        setTodos(
-          todos.map((t) => {
-            if (t.id === updatedTodo.id) {
-              return { ...t, completed: updatedTodo.completed };
-            }
-            return t;
-          })
-        )
-      )
-      .catch((error) => console.error("Error updating todo:", error));
+    updateTodoStatusMutation.mutate(todo.id, !todo.completed);
   }
 
   function handleEditSave(newTitle, todo) {
-    updateTodoTitle(todo.id, newTitle)
-      .then((updatedTodo) =>
-        setTodos(
-          todos.map((t) => {
-            if (t.id === todo.id) {
-              return { ...t, title: updatedTodo.todo };
-            }
-            return t;
-          })
-        )
-      )
-      .catch((error) => console.error("Error updating todo:", error));
+    updateTodoTitleMutation.mutate(todo.id, newTitle);
   }
 
   function handleDelete(todo) {
-    deleteTodo(todo.id).then(() =>
-      setTodos(todos.filter((t) => t.id !== todo.id))
-    );
+    deleteTodoMutation.mutate(todo.id);
   }
+
+  if (todoQuery.status === "pending") return "Loading...";
 
   return (
     <Layout
-      todos={todos}
+      todos={todoQuery.data.map(
+        (todo) => new Todo(todo.id, todo.todo, todo.completed)
+      )}
       handleAdd={handleAdd}
       handleChecked={handleChecked}
       handleEditSave={handleEditSave}
