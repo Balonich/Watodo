@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import TodoItemContainer from "../TodoItem/TodoItemContainer.jsx";
 import AddTodoContainer from "../AddTodo/AddTodoContainer.jsx";
-import FooterContainer from "../Footer/FooterContainer.jsx";
-import TodoItemsListContainer from "../TodoItemsList/TodoItemsListContainer.jsx";
+import Footer from "../Footer/FooterView.jsx";
+import TodoItemsList from "../TodoItemsList/TodoItemsListView.jsx";
 
 export default function Layout({
   todos,
@@ -19,7 +19,7 @@ export default function Layout({
 
       <AddTodoContainer addHandler={handleAdd} />
 
-      <TodoItemsListContainer>
+      <TodoItemsList>
         {todos.map((todo) => (
           <TodoItemContainer
             key={todo.id}
@@ -29,9 +29,9 @@ export default function Layout({
             deleteHandler={handleDelete}
           />
         ))}
-      </TodoItemsListContainer>
+      </TodoItemsList>
 
-      <FooterContainer todos={todos} />
+      <Footer todos={todos} />
     </div>
   );
 }

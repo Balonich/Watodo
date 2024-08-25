@@ -31,7 +31,8 @@
 - [x] Use `fetch` to get todos using API
 - [x] Move API calls (direct usage of `fetch`) to a separate file, an abstraction layer for calls
 - [x] Store base URL in settings config
-- [ ] Rewrite `fetch` to use [React Query](https://tanstack.com/query/latest)
+- [x] Rewrite `fetch` to use [React Query](https://tanstack.com/query/latest)
+- [x] Remove unnecessary containers the only purpose of which is to render view
 
 ## Potential Features
 
