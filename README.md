@@ -34,9 +34,18 @@
 - [x] Rewrite `fetch` to use [React Query](https://tanstack.com/query/latest)
 - [x] Remove unnecessary containers the only purpose of which is to render view
 
+## 6. Auth, backend API change, material UI
+
+- [ ] Refactor LayoutContainer.jsx to move all react-query-related code to a different file
+- [ ] Import react-query-related code where necessary to not pass props deeply into the components
+- [ ] Invalidate only one todo that was changed
+- [ ] Use Axios to fetch data from APIs
+- [ ] Use Material UI
+- [ ] Create login page
+
 ## Potential Features
 
-- [ ] Change emoji icons to png icons
+- [x] Change emoji icons to png icons
 - [ ] TodoItems drag-and-drop reorder ([Tutorial](https://www.youtube.com/watch?v=CJycVlSuaPg))
 
 ## Found Bugs

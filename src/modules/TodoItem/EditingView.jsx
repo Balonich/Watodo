@@ -17,10 +17,10 @@ export default function Editing({
         ref={inputRef}
       />
       <button className="save-button" onClick={saveHandler}>
-        💾
+        <span></span>
       </button>
       <button className="cancel-button" onClick={cancelHandler}>
-        ❌
+        <span></span>
       </button>
     </>
   );

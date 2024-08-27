@@ -31,13 +31,13 @@ export default function TodoItem({
             {todoProp.title}
           </span>
           <button className="edit-button" onClick={editClickHandler}>
-            ✏️
+            <span></span>
           </button>
           <button
             className="delete-button"
             onClick={() => deleteHandler(todoProp)}
           >
-            🗑️
+            <span></span>
           </button>
         </>
       )}

@@ -9,7 +9,8 @@ export default function Checkmark({ todoProp, checkedHandler }) {
         onClick={() => checkedHandler(todoProp)}
         onChange={() => {}} // This is to prevent a warning message in the console
       />
-      <span className="checkmark"></span>
+      <span className="checkmark">
+      </span>
     </label>
   );
 }
