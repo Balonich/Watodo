@@ -1,78 +1,60 @@
+import axios from "axios";
 import { BASE_URL } from "./config";
 
 export async function fetchTodos() {
-  const response = await fetch(`${BASE_URL}?limit=5`);
-
-  if (!response.ok) {
-    throw new Error("Something went wrong.");
+  try {
+    const response = await axios.get(`${BASE_URL}?limit=5`);
+    
+    return response.data.todos;
+  } catch (error) {
+    throw new Error(`Something went wrong ${error}`);
   }
-
-  const data = await response.json();
-  return data.todos;
 }
 
 export async function addTodo(todoTitle) {
-  const response = await fetch(`${BASE_URL}/add`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
+  try {
+    const response = await axios.post(`${BASE_URL}/add`, {
       todo: todoTitle,
       completed: false,
       userId: 1,
-    }),
-  });
+    });
 
-  if (!response.ok) {
-    throw new Error("Something went wrong.");
+    return response.data.todo;
+  } catch (error) {
+    throw new Error(`Something went wrong ${error}`);
   }
-
-  const newTodo = await response.json();
-  return newTodo;
 }
 
 export async function updateTodoStatus(todoId, completed) {
-  const response = await fetch(`${BASE_URL}/${todoId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
+  try {
+    const response = await axios.put(`${BASE_URL}/${todoId}`, {
       completed: completed,
-    }),
-  });
+    });
 
-  if (!response.ok) {
-    throw new Error("Something went wrong.");
+    return response.data.todo;
+  } catch (error) {
+    throw new Error(`Something went wrong ${error}`);
   }
-
-  const updatedTodo = await response.json();
-  return updatedTodo;
 }
 
 export async function updateTodoTitle(todoId, newTitle) {
-  const response = await fetch(`${BASE_URL}/${todoId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
+  try {
+    const response = await axios.put(`${BASE_URL}/${todoId}`, {
       todo: newTitle,
-    }),
-  });
+    });
 
-  if (!response.ok) {
-    throw new Error("Something went wrong.");
+    return response.data.todo;
+  } catch (error) {
+    throw new Error(`Something went wrong ${error}`);
   }
-
-  const updatedTodo = await response.json();
-  return updatedTodo;
 }
 
 export async function deleteTodo(todoId) {
-  const response = await fetch(`${BASE_URL}/${todoId}`, {
-    method: "DELETE",
-  });
+  try {
+    const response = await axios.delete(`${BASE_URL}/${todoId}`);
 
-  if (!response.ok) {
-    throw new Error("Something went wrong.");
+    return response.data.todo;
+  } catch (error) {
+    throw new Error(`Something went wrong ${error}`);
   }
-
-  const deletedTodo = await response.json();
-  return deletedTodo;
 }

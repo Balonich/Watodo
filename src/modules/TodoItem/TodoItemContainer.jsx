@@ -2,12 +2,7 @@ import TodoItem from "./TodoItemView";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-export default function TodoItemContainer({
-  todoProp,
-  checkedHandler,
-  editSaveHandler,
-  deleteHandler,
-}) {
+export default function TodoItemContainer({ todoProp }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(todoProp.title);
 
@@ -19,9 +14,6 @@ export default function TodoItemContainer({
   return (
     <TodoItem
       todoProp={todoProp}
-      checkedHandler={checkedHandler}
-      deleteHandler={deleteHandler}
-      editSaveHandler={editSaveHandler}
       isEditing={isEditing}
       setIsEditing={setIsEditing}
       editText={editText}
@@ -33,7 +25,4 @@ export default function TodoItemContainer({
 
 TodoItemContainer.propTypes = {
   todoProp: PropTypes.object.isRequired,
-  checkedHandler: PropTypes.func.isRequired,
-  editSaveHandler: PropTypes.func.isRequired,
-  deleteHandler: PropTypes.func.isRequired,
 };

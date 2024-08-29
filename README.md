@@ -36,10 +36,10 @@
 
 ## 6. Auth, backend API change, material UI
 
-- [ ] Refactor LayoutContainer.jsx to move all react-query-related code to a different file
-- [ ] Import react-query-related code where necessary to not pass props deeply into the components
+- [x] Refactor LayoutContainer.jsx to move all react-query-related code to a different file
+- [x] Import react-query-related code where necessary to not pass props deeply into the components
 - [ ] Invalidate only one todo that was changed
-- [ ] Use Axios to fetch data from APIs
+- [x] Use Axios to fetch data from APIs
 - [ ] Use Material UI
 - [ ] Create login page
 

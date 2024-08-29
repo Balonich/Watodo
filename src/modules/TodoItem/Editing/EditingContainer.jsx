@@ -1,19 +1,24 @@
 import PropTypes from "prop-types";
 import Editing from "./EditingView";
 import { useRef, useEffect } from "react";
+import { useUpdateTodoStatus } from "../../../queries/todos/todoQueries";
 
 export default function EditingContainer({
   todoProp,
-  editSaveHandler,
   isEditing,
   setIsEditing,
   editText,
   setEditText,
 }) {
   const inputRef = useRef(null);
+  const updateTodoTitleMutation = useUpdateTodoStatus();
+
+  function handleEditSave(newTitle, todo) {
+    updateTodoTitleMutation.mutate(todo.id, newTitle);
+  }
 
   const handleSaveClick = () => {
-    editSaveHandler(editText, todoProp);
+    handleEditSave(editText, todoProp);
     setIsEditing(false);
   };
 
@@ -45,7 +50,6 @@ export default function EditingContainer({
 
 EditingContainer.propTypes = {
   todoProp: PropTypes.object.isRequired,
-  editSaveHandler: PropTypes.func.isRequired,
   isEditing: PropTypes.bool.isRequired,
   setIsEditing: PropTypes.func.isRequired,
   editText: PropTypes.string.isRequired,

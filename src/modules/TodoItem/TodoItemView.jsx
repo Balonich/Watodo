@@ -1,12 +1,10 @@
 import PropTypes from "prop-types";
-import CheckmarkContainer from "./CheckmarkContainer";
-import EditingContainer from "./EditingContainer";
+import CheckmarkContainer from "./Checkmark/CheckmarkContainer";
+import EditingContainer from "./Editing/EditingContainer";
+import TodoItemInfoContainer from "./TodoItemInfo/TodoItemInfoContainer";
 
 export default function TodoItem({
   todoProp,
-  checkedHandler,
-  editSaveHandler,
-  deleteHandler,
   isEditing,
   setIsEditing,
   editText,
@@ -15,31 +13,20 @@ export default function TodoItem({
 }) {
   return (
     <li className="task-item">
-      <CheckmarkContainer todoProp={todoProp} checkedHandler={checkedHandler} />
+      <CheckmarkContainer todoProp={todoProp} />
       {isEditing ? (
         <EditingContainer
           todoProp={todoProp}
-          editSaveHandler={editSaveHandler}
           isEditing={isEditing}
           setIsEditing={setIsEditing}
           editText={editText}
           setEditText={setEditText}
         />
       ) : (
-        <>
-          <span className={todoProp.completed ? "task-text done" : "task-text"}>
-            {todoProp.title}
-          </span>
-          <button className="edit-button" onClick={editClickHandler}>
-            <span></span>
-          </button>
-          <button
-            className="delete-button"
-            onClick={() => deleteHandler(todoProp)}
-          >
-            <span></span>
-          </button>
-        </>
+        <TodoItemInfoContainer
+          todoProp={todoProp}
+          editClickHandler={editClickHandler}
+        />
       )}
     </li>
   );
@@ -47,9 +34,6 @@ export default function TodoItem({
 
 TodoItem.propTypes = {
   todoProp: PropTypes.object.isRequired,
-  checkedHandler: PropTypes.func.isRequired,
-  editSaveHandler: PropTypes.func.isRequired,
-  deleteHandler: PropTypes.func.isRequired,
   isEditing: PropTypes.bool.isRequired,
   setIsEditing: PropTypes.func.isRequired,
   editText: PropTypes.string.isRequired,
