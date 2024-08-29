@@ -6,9 +6,19 @@
   padding: 0;
 }
 
+:root {
+  --main-color: #2c2c2e;
+  --secondary-color: #3c3c3e;
+  --text-color: #e5e5ea;
+}
+
 body {
   background-color: #1c1c1e;
-  color: #e5e5ea;
+  background-image: url("./icons/bg2.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  color: var(--text-color);
   margin: 0;
   display: flex;
   justify-content: center;
@@ -17,11 +27,16 @@ body {
 }
 
 .container {
-  background-color: #2c2c2e;
-  padding: 20px;
+  background-color: var(--main-color);
+  background: #1c1c1e4f;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 15px;
+  padding: 20px;
   width: 400px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.4),
+    inset 0px 0px 20px rgba(255, 255, 255, 0.2);
 }
 
 header h1 {
@@ -30,24 +45,27 @@ header h1 {
   margin: 0;
   padding: 10px 0;
   font-size: 24px;
-  color: #e5e5ea;
+  color: var(--text-color);
 }
+
+/* color vars */
 
 .task-input {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 20px 0;
-  background-color: #3a3a3c;
+  background-color: var(--secondary-color);
   border: none;
   border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 #new-task {
   background: transparent;
   flex: 1;
   outline: none;
-  color: #e5e5ea;
+  color: var(--text-color);
   border: none;
   border-radius: 10px;
   padding: 10px;
@@ -57,8 +75,8 @@ header h1 {
 }
 
 #new-task:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px #3a3a3c inset;
-  -webkit-text-fill-color: #e5e5ea;
+  -webkit-box-shadow: 0 0 0 1000px var(--secondary-color) inset;
+  -webkit-text-fill-color: var(--text-color);
 }
 
 #new-task::placeholder {
@@ -95,15 +113,16 @@ header h1 {
 .task-item {
   display: flex;
   align-items: center;
-  background-color: #2c2c2e;
+  background-color: var(--main-color);
   padding: 10px 0;
   border-radius: 10px;
   margin-bottom: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
   transition: background 0.3s ease;
 }
 
 .task-item:hover {
-  background-color: #3a3a3c;
+  background-color: var(--secondary-color);
   transition: background 0.3s ease;
 }
 
@@ -167,7 +186,7 @@ header h1 {
 
 .task-text {
   flex-grow: 1;
-  color: #e5e5ea;
+  color: var(--text-color);
   font-size: 16px;
   line-height: 1.5;
   padding: 5px 8px;
@@ -183,7 +202,7 @@ header h1 {
   background: #454547;
   flex-grow: 1;
   border: none;
-  color: #e5e5ea;
+  color: var(--text-color);
   font-size: 16px;
   line-height: 1.5;
   padding: 5px 8px;
@@ -213,7 +232,7 @@ header h1 {
   align-items: center;
   justify-content: center;
   border-radius: 50%; /* Make the button circular */
-  background-color: #3a3a3c; /* Initial background color */
+  background-color: var(--secondary-color); /* Initial background color */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Initial shadow for 3D effect */
   padding: 0; /* Remove padding */
 }
@@ -284,7 +303,7 @@ header h1 {
 footer {
   padding: 10px 0;
   text-align: center;
-  border-top: 1px solid #3a3a3c;
+  border-top: 1px solid var(--secondary-color);
   margin-top: 10px;
 }
 
