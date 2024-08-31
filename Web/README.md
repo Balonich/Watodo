@@ -38,7 +38,7 @@
 
 - [x] Refactor LayoutContainer.jsx to move all react-query-related code to a different file
 - [x] Import react-query-related code where necessary to not pass props deeply into the components
-- [ ] Invalidate only one todo that was changed
+- [ч] Invalidate only one todo that was changed
 - [x] Use Axios to fetch data from APIs
 - [ ] Use Material UI
 - [ ] Create login page
