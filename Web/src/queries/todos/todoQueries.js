@@ -1,8 +1,7 @@
 import {
   fetchTodos,
   addTodo,
-  updateTodoStatus,
-  updateTodoTitle,
+  updateTodo,
   deleteTodo,
 } from "../../api/todosApi.js";
 
@@ -40,38 +39,31 @@ export function useAddTodo() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: addTodo,
-    onMutate: async (newTodo) =>
-      await onMutateHandler(queryClient, (old) => [...old, newTodo]),
+    onMutate: async (newTodoTitle) =>
+      await onMutateHandler(queryClient, (old) => {
+        const tempTodoObj = {
+          title: newTodoTitle,
+          id: new Date().getTime(),
+          completed: false,
+        };
+        return [...old, tempTodoObj];
+      }),
     onError: (err, newTodo, context) => onErrorHandler(queryClient, context),
     onSettled: () => onSettledHandler(queryClient),
   });
 }
 
-export function useUpdateTodoStatus() {
+export function useUpdateTodo() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: updateTodoStatus,
+    mutationFn: updateTodo,
     onMutate: async (updatedTodo) =>
       await onMutateHandler(queryClient, (old) =>
         old.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo))
       ),
     onError: (err, updatedTodo, context) =>
       onErrorHandler(queryClient, context),
-    // onSettled: () => onSettledHandler(queryClient),
-  });
-}
-
-export function useUpdateTodoTitle() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: updateTodoTitle,
-    onMutate: async (updatedTodo) =>
-      await onMutateHandler(queryClient, (old) =>
-        old.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo))
-      ),
-    onError: (err, updatedTodo, context) =>
-      onErrorHandler(queryClient, context),
-    // onSettled: () => onSettledHandler(queryClient),
+    onSettled: () => onSettledHandler(queryClient),
   });
 }
 
@@ -85,6 +77,6 @@ export function useDeleteTodo() {
       ),
     onError: (err, deletedTodoId, context) =>
       onErrorHandler(queryClient, context),
-    // onSettled: async () => await onSettledHandler(queryClient),
+    onSettled: async () => await onSettledHandler(queryClient),
   });
 }

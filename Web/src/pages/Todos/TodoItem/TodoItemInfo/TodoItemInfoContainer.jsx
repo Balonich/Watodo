@@ -1,4 +1,4 @@
-import { useDeleteTodo } from "../../../queries/todos/todoQueries";
+import { useDeleteTodo } from "../../../../queries/todos/todoQueries";
 import PropTypes from "prop-types";
 import TodoItemInfo from "./TodoItemInfoView";
 

@@ -3,9 +3,9 @@ import { BASE_URL } from "./config";
 
 export async function fetchTodos() {
   try {
-    const response = await axios.get(`${BASE_URL}?limit=5`);
-    
-    return response.data.todos;
+    const response = await axios.get(`${BASE_URL}`);
+
+    return response.data;
   } catch (error) {
     throw new Error(`Something went wrong ${error}`);
   }
@@ -14,36 +14,23 @@ export async function fetchTodos() {
 export async function addTodo(todoTitle) {
   try {
     const response = await axios.post(`${BASE_URL}/add`, {
-      todo: todoTitle,
+      title: todoTitle,
       completed: false,
-      userId: 1,
     });
 
-    return response.data.todo;
+    return response.data;
   } catch (error) {
     throw new Error(`Something went wrong ${error}`);
   }
 }
 
-export async function updateTodoStatus(todoId, completed) {
+export async function updateTodo(todo) {
   try {
-    const response = await axios.put(`${BASE_URL}/${todoId}`, {
-      completed: completed,
+    const response = await axios.put(`${BASE_URL}/${todo.id}`, {
+      ...todo,
     });
 
-    return response.data.todo;
-  } catch (error) {
-    throw new Error(`Something went wrong ${error}`);
-  }
-}
-
-export async function updateTodoTitle(todoId, newTitle) {
-  try {
-    const response = await axios.put(`${BASE_URL}/${todoId}`, {
-      todo: newTitle,
-    });
-
-    return response.data.todo;
+    return response.data;
   } catch (error) {
     throw new Error(`Something went wrong ${error}`);
   }
@@ -53,7 +40,7 @@ export async function deleteTodo(todoId) {
   try {
     const response = await axios.delete(`${BASE_URL}/${todoId}`);
 
-    return response.data.todo;
+    return response.data;
   } catch (error) {
     throw new Error(`Something went wrong ${error}`);
   }

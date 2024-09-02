@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AddTodo from "./AddTodoView";
-import { useAddTodo } from "../../queries/todos/todoQueries";
+import { useAddTodo } from "../../../queries/todos/todoQueries";
 
 export default function AddTodoContainer() {
   const [taskText, setTaskText] = useState("");

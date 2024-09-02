@@ -1,6 +1,6 @@
 import Layout from "./LayoutView.jsx";
-import Todo from "../../models/todo/todo.jsx";
-import { useTodos } from "../../queries/todos/todoQueries.js";
+import Todo from "../../../models/todo/todo.jsx";
+import { useTodos } from "../../../queries/todos/todoQueries.js";
 
 export default function LayoutContainer() {
   const todoQuery = useTodos();
@@ -10,7 +10,7 @@ export default function LayoutContainer() {
   return (
     <Layout
       todos={todoQuery.data.map(
-        (todo) => new Todo(todo.id, todo.todo, todo.completed)
+        (todo) => new Todo(todo.id, todo.title, todo.completed)
       )}
     />
   );

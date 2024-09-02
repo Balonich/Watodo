@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Editing from "./EditingView";
 import { useRef, useEffect } from "react";
-import { useUpdateTodoStatus } from "../../../queries/todos/todoQueries";
+import { useUpdateTodo } from "../../../../queries/todos/todoQueries";
 
 export default function EditingContainer({
   todoProp,
@@ -11,10 +11,10 @@ export default function EditingContainer({
   setEditText,
 }) {
   const inputRef = useRef(null);
-  const updateTodoTitleMutation = useUpdateTodoStatus();
+    const updateTodoMutation = useUpdateTodo();
 
   function handleEditSave(newTitle, todo) {
-    updateTodoTitleMutation.mutate(todo.id, newTitle);
+    updateTodoMutation.mutate({...todo, title: newTitle});
   }
 
   const handleSaveClick = () => {
