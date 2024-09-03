@@ -4,9 +4,7 @@ import AddTodoContainer from "../AddTodo/AddTodoContainer.jsx";
 import Footer from "../Footer/FooterView.jsx";
 import TodoItemsList from "../TodoItemsList/TodoItemsListView.jsx";
 
-export default function Layout({
-  todos,
-}) {
+export default function TodosLayout({ todos }) {
   return (
     <div className="container">
       <header>
@@ -17,10 +15,7 @@ export default function Layout({
 
       <TodoItemsList>
         {todos.map((todo) => (
-          <TodoItemContainer
-            key={todo.id}
-            todoProp={todo}
-          />
+          <TodoItemContainer key={todo.id} todoProp={todo} />
         ))}
       </TodoItemsList>
 
@@ -29,6 +24,6 @@ export default function Layout({
   );
 }
 
-Layout.propTypes = {
-  todos: PropTypes.array.isRequired
+TodosLayout.propTypes = {
+  todos: PropTypes.array.isRequired,
 };
