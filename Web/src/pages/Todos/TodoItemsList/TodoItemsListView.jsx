@@ -1,7 +1,8 @@
 import PropType from "prop-types";
+import { List } from "@mui/material";
 
 export default function TodoItemsList({ children }) {
-  return <ul className="task-list">{children}</ul>;
+  return <List>{children}</List>;
 }
 
 TodoItemsList.propTypes = {

@@ -1,15 +1,18 @@
+import { Typography } from "@mui/material";
 import PropTypes from "prop-types";
 
 export default function Footer({ todos }) {
   return (
     <footer>
-      <span>
-        You have{" "}
-        <span className="task-count">
-          {todos.filter((todo) => !todo.completed).length}
-        </span>{" "}
-        tasks remaining
-      </span>
+      <Typography
+        variant="body1"
+        sx={{
+          textAlign: "center",
+        }}
+      >
+        You have {todos.filter((todo) => !todo.completed).length} tasks
+        remaining
+      </Typography>
     </footer>
   );
 }

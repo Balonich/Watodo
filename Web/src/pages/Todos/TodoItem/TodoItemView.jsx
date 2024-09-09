@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import CheckmarkContainer from "./Checkmark/CheckmarkContainer";
 import EditingContainer from "./Editing/EditingContainer";
 import TodoItemInfoContainer from "./TodoItemInfo/TodoItemInfoContainer";
+import { ListItem } from "@mui/material";
 
 export default function TodoItem({
   todoProp,
@@ -12,7 +13,7 @@ export default function TodoItem({
   editClickHandler,
 }) {
   return (
-    <li className="task-item">
+    <ListItem>
       <CheckmarkContainer todoProp={todoProp} />
       {isEditing ? (
         <EditingContainer
@@ -28,7 +29,7 @@ export default function TodoItem({
           editClickHandler={editClickHandler}
         />
       )}
-    </li>
+    </ListItem>
   );
 }
 

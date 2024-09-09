@@ -6,6 +6,8 @@
   padding: 0;
 }
 
+/* color vars */
+
 :root {
   --main-color: #2c2c2e;
   --secondary-color: #3c3c3e;
@@ -55,8 +57,6 @@ header h1 {
   font-size: 24px;
   color: var(--text-color);
 }
-
-/* color vars */
 
 .task-input {
   display: flex;
