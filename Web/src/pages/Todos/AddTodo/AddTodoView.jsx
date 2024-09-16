@@ -2,24 +2,13 @@ import PropTypes from "prop-types";
 import { Box, Button, InputBase } from "@mui/material";
 import AddButton from "../../../components/AddButton";
 import { useTheme } from "@emotion/react";
+import InputBox from "../../../components/InputBox";
 
 export default function AddTodo({ addHandler, taskText, setTaskText }) {
   const theme = useTheme();
 
   return (
-    <Box
-      component="section"
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        margin: "20px 0",
-        backgroundColor: theme.palette.secondary.main,
-        border: "none",
-        borderRadius: "10px",
-        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.25)",
-      }}
-    >
+    <InputBox component="section">
       <InputBase
         type="text"
         placeholder="Add a new task..."
@@ -36,7 +25,7 @@ export default function AddTodo({ addHandler, taskText, setTaskText }) {
       >
         <span>+</span>
       </AddButton>
-    </Box>
+    </InputBox>
   );
 }
 

@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import HomeLayout from "./pages/Home/HomeLayout/HomeLayoutView";
 import ErrorLayoutContainer from "./pages/Error/ErrorLayout/ErrorLayoutContainer";
+import LoginLayoutView from "./pages/Login/LoginLayoutView";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import theme from "./themes.js";
 
@@ -24,6 +25,11 @@ const router = createBrowserRouter(
       <Route
         path="/todos"
         element={<TodosLayoutContainer />}
+        errorElement={<ErrorLayoutContainer />}
+      />
+      <Route
+        path="/login"
+        element={<LoginLayoutView />}
         errorElement={<ErrorLayoutContainer />}
       />
     </>
