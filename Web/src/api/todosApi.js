@@ -1,9 +1,8 @@
-import axios from "axios";
-import { BASE_URL } from "./config";
+import axiosInstance from "./axiosInstance";
 
 export async function fetchTodos() {
   try {
-    const response = await axios.get(`${BASE_URL}`);
+    const response = await axiosInstance.get("/todos");
 
     return response.data;
   } catch (error) {
@@ -13,7 +12,7 @@ export async function fetchTodos() {
 
 export async function addTodo(todoTitle) {
   try {
-    const response = await axios.post(`${BASE_URL}/add`, {
+    const response = await axiosInstance.post("/todos/add", {
       title: todoTitle,
       completed: false,
     });
@@ -26,7 +25,7 @@ export async function addTodo(todoTitle) {
 
 export async function updateTodo(todo) {
   try {
-    const response = await axios.put(`${BASE_URL}/${todo.id}`, {
+    const response = await axiosInstance.put(`todos/${todo.id}`, {
       ...todo,
     });
 
@@ -38,7 +37,7 @@ export async function updateTodo(todo) {
 
 export async function deleteTodo(todoId) {
   try {
-    const response = await axios.delete(`${BASE_URL}/${todoId}`);
+    const response = await axiosInstance.delete(`todos/${todoId}`);
 
     return response.data;
   } catch (error) {

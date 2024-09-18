@@ -10,6 +10,7 @@ public class WatodoDbContext : DbContext
     }
 
     public DbSet<TodoSqlModel> Todos { get; set; }
+    public DbSet<UserSqlModel> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -19,6 +20,10 @@ public class WatodoDbContext : DbContext
         modelBuilder.Entity<TodoSqlModel>().HasData(
             new TodoSqlModel { Id = 1, Title = "First Todo", Completed = false },
             new TodoSqlModel { Id = 2, Title = "Second Todo", Completed = true }
+        );
+
+        modelBuilder.Entity<UserSqlModel>().HasData(
+            new UserSqlModel { Id = 1, Email = "balonich@gmail.com", Username = "balonich", Password = "password" }
         );
     }
 }

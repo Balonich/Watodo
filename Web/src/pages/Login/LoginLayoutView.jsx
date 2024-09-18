@@ -19,9 +19,27 @@ export default function LoginLayout() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Perform login logic here
+    
+    try {
+      const response = await fetch('http://localhost:5209/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("Authorization", `Bearer ${data.token}`);
+        // Redirect or update UI
+      } else {
+        console.error('Login failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
