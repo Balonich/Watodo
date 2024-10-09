@@ -21,6 +21,9 @@ let theme = createTheme({
     secondary: {
       main: "#2c2c2e", // secondary color
     },
+    accent: {
+      main: "#bd66e0",
+    },
   },
 });
 
@@ -97,16 +100,6 @@ theme = createTheme(theme, {
           lineHeight: 1.5,
           color: theme.palette.text.primary,
           textAlign: "left",
-        },
-      },
-    },
-    MuiCheckbox: {
-      styleOverrides: {
-        root: {
-          color: "#444",
-          "&.Mui-checked": {
-            color: "linear-gradient(45deg, #9c27b0, #03a9f4)",
-          },
         },
       },
     },

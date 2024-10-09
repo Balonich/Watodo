@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { InputBase, IconButton } from "@mui/material";
-import Icon from "../../../../components/Icon";
+import Icon from "../../../../shared/components/Icon";
 import { useTheme } from "@emotion/react";
 
 export default function Editing({

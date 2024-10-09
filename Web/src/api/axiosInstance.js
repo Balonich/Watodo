@@ -1,7 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "./config";
 
-// Create an Axios instance
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
 });
@@ -14,5 +13,18 @@ axiosInstance.interceptors.request.use((config) => {
   }
   return config;
 });
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.log(`Error in interceptor ${error}`);
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("Authorization");
+      window.location.href = "/login"; // TODO: Use react-router-dom (or smth else) to redirect
+    }
+    
+    return Promise.reject(error);
+  }
+);
 
 export default axiosInstance;

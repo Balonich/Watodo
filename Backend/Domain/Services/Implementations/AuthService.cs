@@ -22,12 +22,12 @@ public class AuthService : IAuthService
 
         if (userSqlModel == null)
         {
-            throw new Exception("User not found");
+            throw new InvalidOperationException("User not found");
         }
 
         if (userSqlModel.Password != user.Password)
         {
-            throw new Exception("Invalid password");
+            throw new InvalidOperationException("Invalid password");
         }
         
         return await _tokenService.GenerateTokenAsync(userSqlModel);

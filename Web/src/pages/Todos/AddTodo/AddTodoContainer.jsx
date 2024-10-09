@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import AddTodo from "./AddTodoView";
 import { useAddTodo } from "../../../queries/todos/todoQueries";
 
@@ -6,9 +6,13 @@ export default function AddTodoContainer() {
   const [taskText, setTaskText] = useState("");
   const addTodoMutation = useAddTodo();
 
-  function handleAdd(todoTitle) {
-    addTodoMutation.mutate(todoTitle);
-  }
+  // Use useCallback to memoize the handleAdd function
+  const handleAdd = useCallback(
+    (todoTitle) => {
+      addTodoMutation.mutate(todoTitle);
+    },
+    [addTodoMutation]
+  );
 
   return (
     <AddTodo

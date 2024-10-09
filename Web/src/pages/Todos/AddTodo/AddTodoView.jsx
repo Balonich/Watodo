@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { Box, Button, InputBase } from "@mui/material";
-import AddButton from "../../../components/AddButton";
+import AddButton from "../../../shared/components/AddButton";
 import { useTheme } from "@emotion/react";
-import InputBox from "../../../components/InputBox";
+import InputBox from "../../../shared/components/InputBox";
 
 export default function AddTodo({ addHandler, taskText, setTaskText }) {
   const theme = useTheme();

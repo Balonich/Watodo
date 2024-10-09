@@ -7,56 +7,56 @@ using Microsoft.EntityFrameworkCore;
 
 public class TodosService : ITodosService
 {
-    private readonly WatodoDbContext dbContext;
-    private readonly IMapper mapper;
+    private readonly WatodoDbContext _dbContext;
+    private readonly IMapper _mapper;
 
     public TodosService(WatodoDbContext dbContext, IMapper mapper)
     {
-        this.dbContext = dbContext;
-        this.mapper = mapper;
+        _dbContext = dbContext;
+        _mapper = mapper;
     }
 
     public async Task<IEnumerable<TodoDto>> GetTodosAsync()
     {
-        var todos = await dbContext.Todos.ToListAsync();
+        var todos = await _dbContext.Todos.ToListAsync();
 
-        return mapper.Map<IEnumerable<TodoDto>>(todos);
+        return _mapper.Map<IEnumerable<TodoDto>>(todos);
     }
 
-    public async Task<TodoDto> GetTodoAsync(int id)
+    public async Task<TodoDto> GetTodoAsync(Guid id)
     {
-        var todo = await dbContext.Todos.FindAsync(id);
+        var todo = await _dbContext.Todos.FindAsync(id);
 
-        return mapper.Map<TodoDto>(todo);
+        return _mapper.Map<TodoDto>(todo);
     }
 
     public async Task<TodoDto> CreateTodoAsync(TodoDto todo)
     {
-        var todoSqlModel = mapper.Map<TodoSqlModel>(todo);
+        var todoSqlModel = _mapper.Map<TodoSqlModel>(todo);
 
-        dbContext.Todos.Add(todoSqlModel);
-        await dbContext.SaveChangesAsync();
+        _dbContext.Todos.Add(todoSqlModel);
+        await _dbContext.SaveChangesAsync();
 
-        return mapper.Map<TodoDto>(todoSqlModel);
+        return _mapper.Map<TodoDto>(todoSqlModel);
     }
 
-    public async Task<TodoDto> UpdateTodoAsync(int id, TodoDto todo)
+    public async Task<TodoDto> UpdateTodoAsync(Guid id, TodoDto todo)
     {
-        var todoSqlModel = await dbContext.Todos.FindAsync(id);
+        var todoSqlModel = await _dbContext.Todos.FindAsync(id);
 
-        mapper.Map(todo, todoSqlModel);
+        _mapper.Map(todo, todoSqlModel);
 
-        await dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync();
 
-        return mapper.Map<TodoDto>(todoSqlModel);
+        return _mapper.Map<TodoDto>(todoSqlModel);
     }
 
-    public async Task DeleteTodoAsync(int id)
+    public async Task DeleteTodoAsync(Guid id)
     {
-        var todo = await dbContext.Todos.FindAsync(id);
+        var todo = await _dbContext.Todos.FindAsync(id);
 
-        dbContext.Todos.Remove(todo);
+        _dbContext.Todos.Remove(todo);
         
-        await dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync();
     }
 }

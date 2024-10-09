@@ -44,9 +44,10 @@
 - [x] Import react-query-related code where necessary to not pass props deeply into the components
 - [x] Invalidate only one todo that was changed
 - [x] Use Axios to fetch data from APIs
-- [ ] Add react router lib & create /todos route
-- [ ] Use Material UI
-- [ ] Create login page
+- [x] Add react router lib & create /todos route
+- [x] Use Material UI
+- [x] Create login page
+- [x] Create registration page
 
 ### Potential Features
 
@@ -63,6 +64,6 @@
 ### 1. Implement basic API
 
 - [x] Minimal API approach for CRUD operation for Todos
-- [ ] Users entity
-- [ ] UserId prop for Todos
-- [ ] Auth with JWT tokens
+- [x] Users entity
+- [x] UserId prop for Todos
+- [x] Auth with JWT tokens

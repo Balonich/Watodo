@@ -4,7 +4,7 @@ import AddTodoContainer from "../AddTodo/AddTodoContainer.jsx";
 import Footer from "../Footer/FooterView.jsx";
 import TodoItemsList from "../TodoItemsList/TodoItemsListView.jsx";
 import { Container, Typography } from "@mui/material";
-import GlassCard from "../../../components/GlassCard.jsx";
+import GlassCard from "../../../shared/components/GlassCard.jsx";
 
 export default function TodosLayout({ todos }) {
   return (

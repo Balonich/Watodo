@@ -6,12 +6,11 @@ export default function TodosLayoutContainer() {
   const todoQuery = useTodos();
 
   if (todoQuery.status === "pending") return "Loading...";
+  if (todoQuery.status === "error") return "Error loading todos";
 
-  return (
-    <TodosLayout
-      todos={todoQuery.data.map(
-        (todo) => new Todo(todo.id, todo.title, todo.completed)
-      )}
-    />
+  const todos = todoQuery.data.map(
+    (todo) => new Todo(todo.id, todo.title, todo.completed)
   );
+
+  return <TodosLayout todos={todos} />;
 }

@@ -9,16 +9,19 @@ import {
 } from "react-router-dom";
 import HomeLayout from "./pages/Home/HomeLayout/HomeLayoutView";
 import ErrorLayoutContainer from "./pages/Error/ErrorLayout/ErrorLayoutContainer";
-import LoginLayoutView from "./pages/Login/LoginLayoutView";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import theme from "./themes.js";
+import LoginLayoutContainer from "./pages/Login/LoginLayout/LoginLayoutContainer.jsx";
+import RegistrationLayoutContainer from "./pages/Registration/RegistrationLayout/RegistrationLayoutContainer.jsx";
+import { ErrorProvider } from "./shared/components/Error/ErrorContext.jsx";
+import Error from "./shared/components/Error/ErrorView.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       {" "}
       <Route
-        path="/home"
+        path="/"
         element={<HomeLayout />}
         errorElement={<ErrorLayoutContainer />}
       />
@@ -29,7 +32,12 @@ const router = createBrowserRouter(
       />
       <Route
         path="/login"
-        element={<LoginLayoutView />}
+        element={<LoginLayoutContainer />}
+        errorElement={<ErrorLayoutContainer />}
+      />
+      <Route
+        path="/signup"
+        element={<RegistrationLayoutContainer />}
         errorElement={<ErrorLayoutContainer />}
       />
     </>
@@ -42,9 +50,12 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <CssBaseline/>
-        <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={false} />
+        <ErrorProvider>
+          <CssBaseline />
+          <RouterProvider router={router} />
+          <ReactQueryDevtools initialIsOpen={false} />
+          <Error />
+        </ErrorProvider>
       </QueryClientProvider>
     </ThemeProvider>
   );

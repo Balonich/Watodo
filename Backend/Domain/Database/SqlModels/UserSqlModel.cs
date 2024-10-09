@@ -5,7 +5,7 @@ namespace Backend.Domain.Database.SqlModels;
 public class UserSqlModel
 {
     [Key]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     [Required]
     public string Email { get; set; }
@@ -15,4 +15,6 @@ public class UserSqlModel
 
     [Required]
     public string Password { get; set; }
+
+    public ICollection<TodoSqlModel> Todos { get; set; }
 }

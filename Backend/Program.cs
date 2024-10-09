@@ -4,7 +4,9 @@ using Backend.Domain.Models;
 using Backend.Domain.Models.MappingProfiles;
 using Backend.Domain.Services.Implementations;
 using Backend.Domain.Services.Interfaces;
+using Backend.Utilities.Middlewares.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -18,6 +20,7 @@ builder.Services.AddAutoMapper(typeof(TodoMappingProfile));
 builder.Services.AddScoped<ITodosService, TodosService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -56,6 +59,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 builder.Services.AddAuthorization();
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -71,58 +75,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
-app.UseAuthorization();
-
 app.UseCors();
 
-app.MapGet("/todos", async (ITodosService todosService) =>
-{
-    return await todosService.GetTodosAsync();
-})
-.WithName("GetTodos")
-.WithOpenApi()
-.RequireAuthorization();
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseTokenExpiration();
 
-app.MapGet("/todos/{id}", async (ITodosService todosService, int id) =>
-{
-    return await todosService.GetTodoAsync(id);
-})
-.WithName("GetTodo")
-.WithOpenApi()
-.RequireAuthorization();
-
-app.MapPost("/todos/add", async (ITodosService todosService, TodoDto todo) =>
-{
-    return await todosService.CreateTodoAsync(todo);
-})
-.WithName("CreateTodo")
-.WithOpenApi()
-.RequireAuthorization();
-
-app.MapPut("/todos/{id}", async (ITodosService todosService, int id, TodoDto todo) =>
-{
-    return await todosService.UpdateTodoAsync(id, todo);
-})
-.WithName("UpdateTodo")
-.WithOpenApi()
-.RequireAuthorization();
-
-app.MapDelete("/todos/{id}", async (ITodosService todosService, int id) =>
-{
-    return todosService.DeleteTodoAsync(id);
-})
-.WithName("DeleteTodo")
-.WithOpenApi()
-.RequireAuthorization();
-
-app.MapPost("/login", async (IAuthService authService, UserDto user) =>
-{
-    var token = await authService.LoginAsync(user);
-    return new { Token = token };
-})
-.WithName("Login")
-.WithOpenApi();
+app.MapControllers();
 
 app.Run();
 

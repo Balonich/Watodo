@@ -16,14 +16,22 @@ public class WatodoDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        var userId = Guid.NewGuid();
+
         // Seed data
-        modelBuilder.Entity<TodoSqlModel>().HasData(
-            new TodoSqlModel { Id = 1, Title = "First Todo", Completed = false },
-            new TodoSqlModel { Id = 2, Title = "Second Todo", Completed = true }
+        modelBuilder.Entity<UserSqlModel>().HasData(
+            new UserSqlModel { Id = userId, Email = "balonich@gmail.com", Username = "balonich", Password = "password" }
         );
 
-        modelBuilder.Entity<UserSqlModel>().HasData(
-            new UserSqlModel { Id = 1, Email = "balonich@gmail.com", Username = "balonich", Password = "password" }
+        modelBuilder.Entity<TodoSqlModel>().HasData(
+            new TodoSqlModel { Id = Guid.NewGuid(), Title = "First Todo", Completed = false, UserId = userId }, 
+            new TodoSqlModel { Id = Guid.NewGuid(), Title = "Second Todo", Completed = true, UserId = userId }
         );
+
+        // Configure the foreign key relationship
+        modelBuilder.Entity<TodoSqlModel>()
+            .HasOne(todo => todo.User)
+            .WithMany(user => user.Todos)
+            .HasForeignKey(todo => todo.UserId);
     }
 }

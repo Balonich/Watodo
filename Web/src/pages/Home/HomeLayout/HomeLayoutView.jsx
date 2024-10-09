@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import GlassCard from "../../../components/GlassCard";
+import GlassCard from "../../../shared/components/GlassCard";
 import { Typography } from "@mui/material";
 
 export default function HomeLayout() {

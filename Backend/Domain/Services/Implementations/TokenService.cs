@@ -2,7 +2,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Backend.Domain.Database.SqlModels;
-using Backend.Domain.Models;
 using Backend.Domain.Services.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 
@@ -21,11 +20,13 @@ public class TokenService : ITokenService
     {
         var claims = new List<Claim> {
             new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Name, user.Username),
+            new Claim("UserId", user.Id.ToString())
         };
 
         var jwtToken = new JwtSecurityToken(
             claims: claims,
+            issuer: _configuration["Jwt:Issuer"],
+            audience: _configuration["Jwt:Issuer"],
             notBefore: DateTime.UtcNow,
             expires: DateTime.UtcNow.AddDays(1),
             signingCredentials: new SigningCredentials(
