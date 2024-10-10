@@ -1,0 +1,6 @@
+@WatodoAPI_HostAddress = http://localhost:5209
+
+GET {{WatodoAPI_HostAddress}}/todos/
+Accept: application/json
+
+###

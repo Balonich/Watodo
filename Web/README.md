@@ -1,0 +1,69 @@
+# Watodo Tasks
+
+## Web Project Tasks
+
+### 1. Set Up the Project
+
+- [x] Create the React project.
+- [x] Clean up the boilerplate code.
+
+### 2. Create Components
+
+- [x] Define the `Todo` type.
+- [x] Create `TodoItem` component.
+- [x] Create `AddTodo` component.
+
+### 3. Implement Basic Features
+
+- [x] Manage state in `App`.
+- [x] Implement adding tasks.
+- [x] Implement displaying tasks.
+- [x] Implement toggling task completion.
+- [x] Implement removing tasks.
+- [x] Implement editing tasks.
+- [x] Implement cancel editing tasks.
+
+### 4. Refactoring
+
+- [x] Use Vite
+- [x] Refactor App.jsx by creating more Components
+- [x] Refactor AddTodo Component to remove direct DOM call
+- [x] Refactor Components to utilize [Container/Presentational (Container/View) pattern](https://medium.com/@vitorbritto/react-design-patterns-the-container-presentational-pattern-775b91aa0c49)
+
+### 5. External API Integration
+
+- [x] Use `fetch` to get todos using API
+- [x] Move API calls (direct usage of `fetch`) to a separate file, an abstraction layer for calls
+- [x] Store base URL in settings config
+- [x] Rewrite `fetch` to use [React Query](https://tanstack.com/query/latest)
+- [x] Remove unnecessary containers the only purpose of which is to render view
+
+### 6. Auth, backend API change, material UI
+
+- [x] Refactor LayoutContainer.jsx to move all react-query-related code to a different file
+- [x] Import react-query-related code where necessary to not pass props deeply into the components
+- [x] Invalidate only one todo that was changed
+- [x] Use Axios to fetch data from APIs
+- [x] Add react router lib & create /todos route
+- [x] Use Material UI
+- [x] Create login page
+- [x] Create registration page
+
+### Potential Features
+
+- [x] Change emoji icons to png icons
+- [ ] TodoItems drag-and-drop reorder ([Tutorial](https://www.youtube.com/watch?v=CJycVlSuaPg))
+
+### Found Bugs
+
+- [ ] Slightly visible white outline on input autofill
+- [ ] Large text will be out of borders
+
+## Backend Project Tasks
+
+### 1. Implement basic API
+
+- [x] Minimal API approach for CRUD operation for Todos
+- [x] Users entity
+- [x] UserId prop for Todos
+- [x] Auth with JWT tokens
